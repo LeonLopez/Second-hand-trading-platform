@@ -1,0 +1,123 @@
+.clear{
+	clear: both;
+}
+.header{
+	height: 200px;
+	width: 100%;
+	margin: 0 auto;
+	background: #307ac1;
+}
+.header img{
+	width: 100px;
+	height: 100px;
+	position: relative;
+    border: 1px solid #307ac1;
+    margin-left: 50px;
+    display: block;
+    padding-top: 50px;
+}
+.title_1{
+	margin-left: 200px;
+    margin-top: -80px;
+	font-family: "华文新魏";
+	font-size: 24px;
+	color: white;
+}
+.title_2{
+	margin-left: 200px;
+    margin-top: 10px;
+	font-family: "华文新魏";
+	font-size: 24px;
+	color: white;
+}
+.content{
+	width: 840px;
+	height: 420px;
+	position: relative;
+	border: 1px solid white;
+	margin: auto;
+	padding: 0 auto;
+	padding-top: 30px;
+}
+#form{
+	width: 400px;
+	position: relative;
+	border: 1px solid white;
+	margin: auto;
+	padding-top: 20px;
+}
+.username{
+	margin-top: 30px;
+	width: 300px;
+	height: 40px;
+	font-family: "微软雅黑";
+	font-size:16px;
+}
+.name{
+	margin-top: 20px;
+	width: 300px;
+	height: 40px;
+	font-family: "微软雅黑";
+	font-size:16px;
+}
+.password{
+	margin-top: 20px;
+	width: 300px;
+	height: 40px;
+	font-family: "微软雅黑";
+	font-size:16px;
+}
+.sure_password{
+	margin-top: 20px;
+	width: 300px;
+	height: 40px;
+	font-family: "微软雅黑";
+	font-size:16px;
+}
+.phone{
+	margin-top: 20px;
+	width: 300px;
+	height: 40px;
+	font-family: "微软雅黑";
+	font-size:16px;
+}
+.email{
+	margin-top: 20px;
+	width: 300px;
+	height: 40px;
+	font-family: "微软雅黑";
+	font-size:16px;
+}
+#button{
+	margin-top: 30px;
+	margin-left:190px;
+	width: 60px;
+	height: 30px;
+	color:white;
+	border:1px solid #f37800;
+	background-color: #f37800;
+}
+#button:hover{
+    background-color: #fb5005;
+    border:1px solid #fb5005;
+}
+.grey{
+	margin-top: 100px;
+	height: 100px;
+	background-color: #e7e4e4;
+}
+.blue{
+	height: 50px;
+	background-color: #307ac1;
+}
+.copyright{
+	display: block;	
+	width: 280px;
+	margin-top: 10px;
+	margin-left: 570px;
+	padding-top:35px;
+	font-size: 14px;
+}
+span{
+	margin-left: 32px;
+}
