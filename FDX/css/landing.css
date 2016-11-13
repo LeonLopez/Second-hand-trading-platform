@@ -1,0 +1,106 @@
+.clear{
+	clear: both;
+}
+.header{
+	height: 300px;
+	width: 100%;
+	margin: 0 auto;
+	background: #307ac1 url("../image/cloud.png") no-repeat  bottom;
+	background-size: 100%;
+}
+.header img{
+	width: 100px;
+	height: 100px;
+	position: relative;
+    border: 1px solid #307ac1;
+    margin:auto;
+    display: block;
+    padding-top: 80px;
+}
+.content{
+	width: 840px;
+	height: 300px;
+	position: relative;
+	border: 1px solid white;
+	margin: auto;
+	margin-top: 50px;	
+	padding: 0 auto;
+	padding-top: 50px;
+
+}
+.left{
+	width: 200px;
+	height: 100px;
+	float: right;
+	border-top: 6px solid #307ac1;
+    border-right: 6px solid #307ac1;
+}
+#form{
+	width: 400px;
+	position: relative;
+	border: 1px solid white;
+	margin: auto;
+	padding-top: 20px;
+}
+.right{
+	width: 200px;
+	height: 100px;
+	float:left;
+	border-bottom: 6px solid #307ac1;
+    border-left: 6px solid #307ac1;
+    margin-top: -60px;
+    margin-left: -30px;
+    margin-bottom: 60px;
+}
+.username{
+	margin-top: 50px;
+	width: 300px;
+	height: 40px;
+	font-family: "微软雅黑";
+	font-size:16px;
+	background: url('../image/username.gif') no-repeat 270px;
+}
+.password{
+	margin-bottom: 15px;
+	margin-top: 20px;
+	width: 300px;
+	height: 40px;
+	font-family: "微软雅黑";
+	font-size:16px;
+	background: url('../image/password.gif') no-repeat 275px;
+}
+.register{
+	margin: 10px auto;
+	border:1px solid white;
+	width: 150px;
+}
+#button{
+	margin-top: 10px;
+	margin-left:160px;
+	width: 60px;
+	height: 30px;
+	color:white;
+	border:1px solid #f37800;
+	background-color: #f37800;
+}
+#button:hover{
+    background-color: #fb5005;
+    border:1px solid #fb5005;
+}
+.grey{
+	margin-top: 100px;
+	height: 100px;
+	background-color: #e7e4e4;
+}
+.blue{
+	height: 50px;
+	background-color: #307ac1;
+}
+span{
+	display: block;	
+	width: 280px;
+	margin-top: 10px;
+	margin: 0 auto;
+	padding-top:35px;
+	font-size: 14px;
+}
