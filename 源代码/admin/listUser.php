@@ -1,6 +1,6 @@
 <?php
-require_once '../config.php';
-require_once '../connect_db.php';
+require_once '../config/config.php';
+require_once '../config/connect_db.php';
 
 $usersql = "select * from user order by id";
 $userres = $db->query($usersql);
@@ -22,8 +22,9 @@ $userres = $db->query($usersql);
 
 
 			<div class="details">
-			<h3>用户列表</h3><br>
-				
+				<h3>用户列表</h3>
+				<br>
+
 				<!--表格-->
 				<table class="table" cellspacing="0" cellpadding="0" align="center">
 					<thead>
@@ -37,8 +38,8 @@ $userres = $db->query($usersql);
 					</thead>
 					<tbody>
                          <?php
-                         while ($row = mysqli_fetch_assoc($userres)) {
-                         ?>
+                        while ($row = mysqli_fetch_assoc($userres)) {
+                            ?>
                             <tr align="center">
 							<!--这里的id和for里面的c1 需要循环出来-->
 

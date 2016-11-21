@@ -1,6 +1,6 @@
 <?php 
-require_once '../config.php';
-require_once '../connect_db.php';
+require_once '../config/config.php';
+require_once '../config/connect_db.php';
 
 
 if($_POST['submit']){
