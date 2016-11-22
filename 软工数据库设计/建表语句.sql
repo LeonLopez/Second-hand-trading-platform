@@ -1,9 +1,9 @@
 
 
-CREATE DATABASE `RG`
+CREATE DATABASE `tradePlatform`
     CHARACTER SET 'utf8';
 
-USE `RG`;
+USE `tradePlatform`;
 
 
 
@@ -49,7 +49,6 @@ CREATE TABLE `user` (
 CREATE TABLE `product` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(10) NOT NULL,
-  `image` varchar(200) DEFAULT NULL,
   `description` text,
   `price` float(10,2) DEFAULT NULL,
   `userid` int(11) DEFAULT NULL,
@@ -113,3 +112,9 @@ CREATE TABLE `orders` (
   FOREIGN KEY (`userid`) REFERENCES `user` (`id`)
 )CHARSET=utf8;
 
+create table album(
+    id int primary key auto_increment,
+    pid int not null,
+    image varchar(100),
+    foreign key(pid) references product(id)
+);
