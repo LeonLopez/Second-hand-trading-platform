@@ -1,7 +1,8 @@
 <?php
 require_once '../config/config.php';
 require_once '../config/connect_db.php';
-
+require_once 'checkAdmin.php';
+checkAdmin();
 $catesql = "select * from category order by id";
 $result = $db->query($catesql);
 if (! $result) {

@@ -1,7 +1,8 @@
 <?php 
 require_once '../config/config.php';
 require_once '../config/connect_db.php';
-
+require_once 'checkAdmin.php';
+checkAdmin();
 
 if($_POST['submit']){
    $updateusersql = "update user set username='{$_POST['username']}',password='{$_POST['password']}',sname='{$_POST['sname']}',phone='{$_POST['phone']}',email='{$_POST['email']}',address='{$_POST['address']}' where id={$_POST['id']};";

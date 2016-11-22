@@ -1,7 +1,8 @@
 <?php 
 require_once '../config/config.php';
 require_once '../config/connect_db.php';
-
+require_once 'checkAdmin.php';
+checkAdmin();
 
 if($_POST['submit']){
    $updatecatesql = "update category set name='".$_POST['cname']."' where id=".$_POST['cid'];

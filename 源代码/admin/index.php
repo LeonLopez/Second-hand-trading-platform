@@ -1,4 +1,9 @@
-
+<?php 
+require_once '../config/config.php';
+require_once '../config/connect_db.php';
+require_once 'checkAdmin.php';
+checkAdmin();
+?>
 <!doctype html>
 <html>
 <head>
@@ -20,14 +25,13 @@
         <div class="link fr">
             <b>欢迎您
             <?php 
-				if(isset($_SESSION['adminName'])){
-					echo $_SESSION['adminName'];
-				}elseif(isset($_COOKIE['adminName'])){
-					echo $_COOKIE['adminName'];
+				if(isset($_SESSION['ADMINNAME'])){
+					echo $_SESSION['ADMINNAME'];
 				}
+				
             ?>
             
-            </b>&nbsp;&nbsp;&nbsp;&nbsp;<a href="../index.php" class="icon icon_i">首页</a><span></span><a href="#" class="icon icon_j">前进</a><span></span><a href="#" class="icon icon_t">后退</a><span></span><a href="#" class="icon icon_n">刷新</a><span></span><a href="../logout.php" class="icon icon_e">退出</a>
+            </b>&nbsp;&nbsp;&nbsp;&nbsp;<a href="../index.php" class="icon icon_i">首页</a><span></span><a href="logout.php" class="icon icon_e">注销</a>
         </div>
     </div>
     <div class="content clearfix">
@@ -71,8 +75,8 @@
                     <li>
                         <h3><span onclick="show('menu4','change4')" id="change4">+</span>公告管理</h3>
                         <dl id="menu4" style="display:none;">
-                        	<dd><a href="#" target="mainFrame">添加公告</a></dd>
-                            <dd><a href="#" target="mainFrame">公告列表</a></dd>
+                        	<dd><a href="addNotice.php" target="mainFrame">添加公告</a></dd>
+                            <dd><a href="listNotice.php" target="mainFrame">公告列表</a></dd>
                         </dl>
                     </li>
                     

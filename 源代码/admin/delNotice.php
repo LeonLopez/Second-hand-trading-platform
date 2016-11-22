@@ -4,7 +4,7 @@ require_once '../config/connect_db.php';
 require_once 'checkAdmin.php';
 checkAdmin();
 if(isset($_GET['id'])==TRUE){
-    $prosql = "delete from product where id=".$_GET['id'];
-    $prores = $db->query($prosql);
+    $noticesql = "delete from notice where id=".$_GET['id'];
+    $noticeres = $db->query($noticesql);
 }
-header("Location:".$config_basedir."admin/listPro.php");
+header("Location:".$config_basedir."admin/listNotice.php");

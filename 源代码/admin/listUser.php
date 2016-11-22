@@ -1,7 +1,8 @@
 <?php
 require_once '../config/config.php';
 require_once '../config/connect_db.php';
-
+require_once 'checkAdmin.php';
+checkAdmin();
 $usersql = "select * from user order by id";
 $userres = $db->query($usersql);
 

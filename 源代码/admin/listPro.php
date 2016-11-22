@@ -1,6 +1,8 @@
 <?php 
 require_once '../config/config.php';
 require_once '../config/connect_db.php';
+require_once 'checkAdmin.php';
+checkAdmin();
 $order=$_GET['order']?$_GET['order']:null;
 $orderBy=$order?"order by ".$order:null;
 $keywords=$_GET['keywords']?$_GET['keywords']:null;

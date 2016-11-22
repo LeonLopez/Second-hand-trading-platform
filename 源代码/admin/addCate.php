@@ -1,16 +1,17 @@
 <?php 
 require_once '../config/config.php';
 require_once '../config/connect_db.php';
-
+require_once 'checkAdmin.php';
+checkAdmin();
 if($_POST['submit']){
     if($_POST['cname']!=""&&strlen($_POST['cname'])>0){
         $sql = "insert into category(name) values('".$_POST['cname']."');";
         $res = $db->query($sql);
         if($res){
-            echo "添加成功！&nbsp;&nbsp;<a href='addcate.php'>继续添加</a>&nbsp;&nbsp;<a href='listcate.php'>查看分类列表</a>";
+            echo "添加成功！&nbsp;&nbsp;<a href='addCate.php'>继续添加</a>&nbsp;&nbsp;<a href='listCate.php'>查看分类列表</a>";
         }
         else{
-            echo "添加失败！&nbsp;&nbsp;<a href='listcate.php'>重新添加</a>";
+            echo "添加失败！&nbsp;&nbsp;<a href='addCate.php'>重新添加</a>";
         }
     }
     else{
