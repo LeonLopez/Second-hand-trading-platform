@@ -2,8 +2,19 @@
 require_once '../config/config.php';
 require_once '../config/connect_db.php';
 require_once 'checkAdmin.php';
+require_once '../lib/page.func.php';
 checkAdmin();
-$usersql = "select * from user order by id";
+$sql = "select * from user order by id";
+$res = $db->query($sql);
+$totalRows = $res->num_rows;
+$pageSize = 6;
+$totalPage = ceil($totalRows/$pageSize);
+$page=$_REQUEST['page']?(int)$_REQUEST['page']:1;
+if($page<1||$page==null||!is_numeric($page))$page=1;
+if($page>$totalPage)$page=$totalPage;
+$offset=($page-1)*$pageSize;
+
+$usersql = "select * from user order by id limit {$offset},{$pageSize}";
 $userres = $db->query($usersql);
 
 ?>
@@ -54,6 +65,11 @@ $userres = $db->query($usersql);
 								onclick="delUser(<?php echo $row['id'];?>)"></td>
 						</tr>
                                <?php }?>
+                        <?php if($totalRows>$pageSize):?>
+                            <tr >
+                            	<td colspan="5"><?php echo showPage($page, $totalPage);?></td>
+                            </tr>
+                        <?php endif;?>       
                         </tbody>
 				</table>
 			</div>

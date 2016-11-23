@@ -2,12 +2,23 @@
 require_once '../config/config.php';
 require_once '../config/connect_db.php';
 require_once 'checkAdmin.php';
+require_once '../lib/page.func.php';
 checkAdmin();
 $order=$_GET['order']?$_GET['order']:null;
 $orderBy=$order?"order by ".$order:null;
 $keywords=$_GET['keywords']?$_GET['keywords']:null;
 $where=$keywords?"where product.name like '%{$keywords}%'":null;
-$prosql = "select product.*,category.name as cname from product join category on product.categoryid=category.id {$where} {$orderBy};";
+$sql = "select product.*,category.name as cname from product join category on product.categoryid=category.id {$where} {$orderBy};";
+$res = $db->query($sql);
+$totalRows = $res->num_rows;
+$pageSize = 6;
+$totalPage = ceil($totalRows/$pageSize);
+$page=$_REQUEST['page']?(int)$_REQUEST['page']:1;
+if($page<1||$page==null||!is_numeric($page))$page=1;
+if($page>$totalPage)$page=$totalPage;
+$offset=($page-1)*$pageSize;
+
+$prosql = "select product.*,category.name as cname from product join category on product.categoryid=category.id {$where} {$orderBy} limit {$offset},{$pageSize};";
 $prores = $db->query($prosql);
 
 ?>
@@ -133,7 +144,11 @@ $prores = $db->query($prosql);
                                 </td>
                             </tr>
                            <?php  endforeach;?>
-                           
+                           <?php if($totalRows>$pageSize):?>
+                            <tr >
+                            	<td colspan="7"><?php echo showPage($page, $totalPage,"keywords={$keywords}&order={$order}");?></td>
+                            </tr>
+                          <?php endif;?> 
                         </tbody>
                     </table>
                 </div>
