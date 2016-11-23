@@ -1,0 +1,71 @@
+
+/*头部*/
+#head{
+    background-color: #307ac1;
+}
+#head .col-md-2{
+    padding-top:30px;
+    padding-bottom:30px ;
+}
+#head .col-md-2 p{
+    text-align: center;
+}
+#head .col-md-2 img{
+    height:100px;
+    width:100px;
+}
+#head .col-md-2{
+    padding-top:30px;
+    padding-bottom:30px ;
+}
+
+#head .col-md-10 h4{
+    color: #fff;
+}
+#head .col-md-10 small{
+    color:#fff;
+}
+#head .col-md-10{
+    padding-top:50px;
+}
+
+/*主体*/
+#body{
+    padding-top: 15px;
+    padding-bottom: 30px;
+}
+
+#body .col-md-3{
+    text-align: center;
+}
+#body .col-md-3 img{
+    height: 80px;
+    width: 120px;
+}
+#body .col-md-3 ul li{
+    margin-top: 15px;
+}
+#body .col-md-3 button{
+    width:82px;
+    height: 40px;
+    color: #307ac1;
+    border:2px solid  #307ac1;
+}
+
+#body .col-md-9{
+    padding-top:80px;
+}
+/* 页脚 */
+#footer{
+    height: 50px;
+    background-color: #e7e4e4;
+}
+#footer .col-md-12{
+    text-align: center;
+    padding-top: 7px;
+}
+/*尾部*/
+#trail{
+    height: 50px;
+    background-color:#307ac1;
+}
