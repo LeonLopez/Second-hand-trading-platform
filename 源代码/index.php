@@ -419,6 +419,7 @@ require 'connect_db.php';
 					</li>
 					<li class="item fixed"></li>
 					<li class="item fixed"></li>
+					<li class="item fixed"></li>
 				</ul>
 			</div>
 			<div class="pager">
