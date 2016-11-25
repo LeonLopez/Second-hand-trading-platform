@@ -165,7 +165,7 @@ $prores = $db->query($prosql);
 					<li class="item fixed"></li>
 					<li class="item fixed"></li>
 					<li class="item fixed"></li>
-					<li class="item fixed"></li>
+					
 				</ul>
 			</div>
 			 
