@@ -1,6 +1,23 @@
 <?php 
-require 'config.php';
-require 'connect_db.php';
+require 'config/config.php';
+require 'config/connect_db.php';
+require_once 'lib/index.page.func.php';
+
+$keywords=$_GET['keywords']?$_GET['keywords']:null;
+$where=$keywords?"where product.name like '%{$keywords}%'":null;
+$sql = "select * from product {$where} order by date desc ";
+$res = $db->query($sql);
+$totalRows = $res->num_rows;
+$pageSize = 16;
+$totalPage = ceil($totalRows/$pageSize);
+$page=$_REQUEST['page']?(int)$_REQUEST['page']:1;
+if($page<1||$page==null||!is_numeric($page))$page=1;
+if($page>$totalPage)$page=$totalPage;
+$offset=($page-1)*$pageSize;
+
+$prosql = "select * from product {$where} order by date desc  limit {$offset},{$pageSize}";
+$prores = $db->query($prosql);
+
 ?>
 
 <!DOCTYPE html>
@@ -38,17 +55,17 @@ require 'connect_db.php';
 		<div class="logo_bgm">
 			<img src="images/LOGO.png" alt="网站logo" />
 		</div>
-		<h3 class="logo_headline"><a href="#">大学生二手交易平台</a></h2>
+		<h3 class="logo_headline"><a href="index.php">大学生二手交易平台</a></h2>
 		<ul id="top_nav">
-			<li><a href="#" class="index active">首页</a></li>
+			<li><a href="index.php" class="index active">首页</a></li>
 			<li><a href="#" class="classify">分类</a></li>
 			<li><a href="#" class="publish">发布闲置</a></li>
 		</ul>
 		<div class="search">
-			<form action="#">
-				<input type="text" id="search_goods" placeholder="搜你所想" />
-				<input type="submit" id="search_btn" value="搜索">
-			</form>
+			
+				<input type="text" id="search_goods" placeholder="搜你所想" onkeypress="search()" value="<?php echo $keywords?>"/>
+				<input type="button" id="search_btn" value="搜索" onclick="search()">
+			
 		</div>
 	</div>
 	<div id="content">
@@ -117,318 +134,46 @@ require 'connect_db.php';
 			<div class="line"></div>
 			<div class="item-list">
 				<ul class="items cleafix">
+				<?php foreach ($prores as $row):?>
 					<li class="item">
-						<a href="#" class="product_img" target="_blank">
-							<img src="images/product-list/1.jpg" alt="">
+						<a href="productDetail.php?id=<?php echo $row['id'];?>" class="product_img" target="_blank">
+							<?php 
+					         $imgsql = "select * from album where pid=".$row['id']." limit 1";
+					         $images = $db->query($imgsql);
+					         if($images){
+					             $img = $images->fetch_assoc();
+					             echo "<img src='uploads/".$img['image']."' alt=''>";
+					         }
+					         else{
+					             echo "<img src='' alt='暂无图片'>";
+					         }
+					        ?>
+							
 						</a>
 						<div class="info">
-							<div class="price">450</div>
-							<div class="name"><a href="#">新百伦运动鞋</a></div>
+							<div class="price"><?php echo $row['price']; ?></div>
+							<div class="name"><a href="productDetail.php?id=<?php echo $row['id'];?>" ><?php echo $row['name']; ?></a></div>
 							<div class="details">
-								<a href="#">详情</a>
+								<a href="productDetail.php?id=<?php echo $row['id'];?>" >详情</a>
 							</div>
 							<div class="like">
 								<a href="#">收藏</a>
 							</div>
 						</div>
 					</li>
-					<li class="item">
-						<a href="#" class="product_img" target="_blank">
-							<img src="images/product-list/2.jpg" alt="">
-						</a>
-						<div class="info">
-							<div class="price">180</div>
-							<div class="name"><a href="#">女士手表</a></div>
-							<div class="details">
-								<a href="#">详情</a>
-							</div>
-							<div class="like">
-								<a href="#">收藏</a>
-							</div>
-						</div>
-					</li>
-					<li class="item">
-						<a href="#" class="product_img" target="_blank">
-							<img src="images/product-list/3.jpg" alt="">
-						</a>
-						<div class="info">
-							<div class="price">3000</div>
-							<div class="name"><a href="#">苹果手机</a></div>
-							<div class="details">
-								<a href="#">详情</a>
-							</div>
-							<div class="like">
-								<a href="#">收藏</a>
-							</div>
-						</div>
-					</li>
-					<li class="item">
-						<a href="#" class="product_img" target="_blank">
-							<img src="images/product-list/4.jpg" alt="">
-						</a>
-						<div class="info">
-							<div class="price">90</div>
-							<div class="name"><a href="#">电热毯</a></div>
-							<div class="details">
-								<a href="#">详情</a>
-							</div>
-							<div class="like">
-								<a href="#">收藏</a>
-							</div>
-						</div>
-					</li>
-					<li class="item">
-						<a href="#" class="product_img" target="_blank">
-							<img src="images/product-list/1.jpg" alt="">
-						</a>
-						<div class="info">
-							<div class="price">450</div>
-							<div class="name"><a href="#">新百伦运动鞋</a></div>
-							<div class="details">
-								<a href="#">详情</a>
-							</div>
-							<div class="like">
-								<a href="#">收藏</a>
-							</div>
-						</div>
-					</li>
-					<li class="item">
-						<a href="#" class="product_img" target="_blank">
-							<img src="images/product-list/2.jpg" alt="">
-						</a>
-						<div class="info">
-							<div class="price">180</div>
-							<div class="name"><a href="#">女士手表</a></div>
-							<div class="details">
-								<a href="#">详情</a>
-							</div>
-							<div class="like">
-								<a href="#">收藏</a>
-							</div>
-						</div>
-					</li>
-					<li class="item">
-						<a href="#" class="product_img" target="_blank">
-							<img src="images/product-list/3.jpg" alt="">
-						</a>
-						<div class="info">
-							<div class="price">3000</div>
-							<div class="name"><a href="#">苹果手机</a></div>
-							<div class="details">
-								<a href="#">详情</a>
-							</div>
-							<div class="like">
-								<a href="#">收藏</a>
-							</div>
-						</div>
-					</li>
-					<li class="item">
-						<a href="#" class="product_img" target="_blank">
-							<img src="images/product-list/4.jpg" alt="">
-						</a>
-						<div class="info">
-							<div class="price">90</div>
-							<div class="name"><a href="#">电热毯</a></div>
-							<div class="details">
-								<a href="#">详情</a>
-							</div>
-							<div class="like">
-								<a href="#">收藏</a>
-							</div>
-						</div>
-					</li>
-					<li class="item">
-						<a href="#" class="product_img" target="_blank">
-							<img src="images/product-list/1.jpg" alt="">
-						</a>
-						<div class="info">
-							<div class="price">450</div>
-							<div class="name"><a href="#">新百伦运动鞋</a></div>
-							<div class="details">
-								<a href="#">详情</a>
-							</div>
-							<div class="like">
-								<a href="#">收藏</a>
-							</div>
-						</div>
-					</li>
-					<li class="item">
-						<a href="#" class="product_img" target="_blank">
-							<img src="images/product-list/2.jpg" alt="">
-						</a>
-						<div class="info">
-							<div class="price">180</div>
-							<div class="name"><a href="#">女士手表</a></div>
-							<div class="details">
-								<a href="#">详情</a>
-							</div>
-							<div class="like">
-								<a href="#">收藏</a>
-							</div>
-						</div>
-					</li>
-					<li class="item">
-						<a href="#" class="product_img" target="_blank">
-							<img src="images/product-list/3.jpg" alt="">
-						</a>
-						<div class="info">
-							<div class="price">3000</div>
-							<div class="name"><a href="#">苹果手机</a></div>
-							<div class="details">
-								<a href="#">详情</a>
-							</div>
-							<div class="like">
-								<a href="#">收藏</a>
-							</div>
-						</div>
-					</li>
-					<li class="item">
-						<a href="#" class="product_img" target="_blank">
-							<img src="images/product-list/4.jpg" alt="">
-						</a>
-						<div class="info">
-							<div class="price">90</div>
-							<div class="name"><a href="#">电热毯</a></div>
-							<div class="details">
-								<a href="#">详情</a>
-							</div>
-							<div class="like">
-								<a href="#">收藏</a>
-							</div>
-						</div>
-					</li>
-					<li class="item">
-						<a href="#" class="product_img" target="_blank">
-							<img src="images/product-list/1.jpg" alt="">
-						</a>
-						<div class="info">
-							<div class="price">450</div>
-							<div class="name"><a href="#">新百伦运动鞋</a></div>
-							<div class="details">
-								<a href="#">详情</a>
-							</div>
-							<div class="like">
-								<a href="#">收藏</a>
-							</div>
-						</div>
-					</li>
-					<li class="item">
-						<a href="#" class="product_img" target="_blank">
-							<img src="images/product-list/2.jpg" alt="">
-						</a>
-						<div class="info">
-							<div class="price">180</div>
-							<div class="name"><a href="#">女士手表</a></div>
-							<div class="details">
-								<a href="#">详情</a>
-							</div>
-							<div class="like">
-								<a href="#">收藏</a>
-							</div>
-						</div>
-					</li>
-					<li class="item">
-						<a href="#" class="product_img" target="_blank">
-							<img src="images/product-list/3.jpg" alt="">
-						</a>
-						<div class="info">
-							<div class="price">3000</div>
-							<div class="name"><a href="#">苹果手机</a></div>
-							<div class="details">
-								<a href="#">详情</a>
-							</div>
-							<div class="like">
-								<a href="#">收藏</a>
-							</div>
-						</div>
-					</li>
-					<li class="item">
-						<a href="#" class="product_img" target="_blank">
-							<img src="images/product-list/4.jpg" alt="">
-						</a>
-						<div class="info">
-							<div class="price">90</div>
-							<div class="name"><a href="#">电热毯</a></div>
-							<div class="details">
-								<a href="#">详情</a>
-							</div>
-							<div class="like">
-								<a href="#">收藏</a>
-							</div>
-						</div>
-					</li>
-					<li class="item">
-						<a href="#" class="product_img" target="_blank">
-							<img src="images/product-list/1.jpg" alt="">
-						</a>
-						<div class="info">
-							<div class="price">450</div>
-							<div class="name"><a href="#">新百伦运动鞋</a></div>
-							<div class="details">
-								<a href="#">详情</a>
-							</div>
-							<div class="like">
-								<a href="#">收藏</a>
-							</div>
-						</div>
-					</li>
-					<li class="item">
-						<a href="#" class="product_img" target="_blank">
-							<img src="images/product-list/2.jpg" alt="">
-						</a>
-						<div class="info">
-							<div class="price">180</div>
-							<div class="name"><a href="#">女士手表</a></div>
-							<div class="details">
-								<a href="#">详情</a>
-							</div>
-							<div class="like">
-								<a href="#">收藏</a>
-							</div>
-						</div>
-					</li>
-					<li class="item">
-						<a href="#" class="product_img" target="_blank">
-							<img src="images/product-list/3.jpg" alt="">
-						</a>
-						<div class="info">
-							<div class="price">3000</div>
-							<div class="name"><a href="#">苹果手机</a></div>
-							<div class="details">
-								<a href="#">详情</a>
-							</div>
-							<div class="like">
-								<a href="#">收藏</a>
-							</div>
-						</div>
-					</li>
-					<li class="item">
-						<a href="#" class="product_img" target="_blank">
-							<img src="images/product-list/4.jpg" alt="">
-						</a>
-						<div class="info">
-							<div class="price">90</div>
-							<div class="name"><a href="#">电热毯</a></div>
-							<div class="details">
-								<a href="#">详情</a>
-							</div>
-							<div class="like">
-								<a href="#">收藏</a>
-							</div>
-						</div>
-					</li>
+				<?php endforeach;?>	
+					<li class="item fixed"></li>
 					<li class="item fixed"></li>
 					<li class="item fixed"></li>
 				</ul>
 			</div>
+			 
 			<div class="pager">
 					<div class="pagerbar">
-						<a class="current" href="javascript:;">1</a>
-						<a href="javascript:;">2</a>
-						<a href="javascript:;">3</a>
-						<a href="javascript:;">4</a>
-						<a href="javascript:;">下页</a>
-						<a class="last" href="javascript:;" title="末页">末页</a>
+						<?php if($totalRows>$pageSize):
+			                  echo showPage($page, $totalPage,"keywords={$keywords}");
+                              endif;
+                        ?> 
 					</div>
 				</div>
 		</div>
@@ -452,5 +197,13 @@ require 'connect_db.php';
 		</div>
 		 <footer><p>Copyright @ 2016 14级计科3班 软件工程</p></footer>
 	</div>
+	<script type="text/javascript">
+	function search(){
+		if(event.keyCode==13 || document.getElementById("search_btn").value=="搜索"){
+			var val=document.getElementById("search_goods").value;
+			window.location="index.php?keywords="+val;
+		}
+	}
+	</script>
 </body>
 </html>
