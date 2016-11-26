@@ -1,0 +1,20 @@
+.border{
+	border-top:1px solid #307ac1;
+}
+button{
+	width: 60px;
+	height: 30px;
+	color:white;
+	border:1px solid #f37800;
+	background-color: #f37800;
+}
+button:hover{
+    background-color: #fb5005;
+    border:1px solid #fb5005;
+}
+.button{
+	float: right;
+	margin-top: 130px;
+	margin-bottom: 20px;
+	margin-right: -30px
+}
