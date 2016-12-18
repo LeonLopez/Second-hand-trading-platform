@@ -1,10 +1,20 @@
+<?php 
+require_once 'checkUser.php';
+checkUser();
+require_once 'config/connect_db.php';
+$uid = $_SESSION['USERID'];
+$sql = "select user.*,product.*,product.id pid from orders,product,user where orders.userid={$uid} and product.id=orders.productid and user.id={$uid};";
+$res = $db->query($sql);
+
+?>
+
 <!DOCTYPE html>
 <html lang="zh-cn">
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Bootstrap 101 Template</title>
+    <title>购物车</title>
 
     <!-- Bootstrap -->
     <link href="css/bootstrap.min.css" rel="stylesheet">
@@ -17,54 +27,40 @@
 </head>
 <body>
 <div class="container">
+   <?php foreach($res as $row):?>
     <div class="row">
         <div class="col-md-12">
             <div class = "goods goods-first">
-                <input type = "checkbox" value="1299"/>
-                <img src = "images/good1.jpg"/>
+                <input type = "checkbox" value="<?php echo $row['price']; ?>" />
+                <?php 
+					         $imgsql = "select * from album where pid=".$row['pid']." limit 1";
+					         $images = $db->query($imgsql);
+					         if($images){
+					             $img = $images->fetch_assoc();
+					             echo "<img src='uploads/".$img['image']."' >";
+					         }
+					         else{
+					             echo "<img src='' alt='暂无图片'>";
+					         }
+					        ?>
+               
                 <dl class="dl-horizontal">
                     <dt>价格：</dt>
-                    <dd><span class="price">1299</span></dd>
+                    <dd><span class="price"><?php echo $row['price']; ?>元</span></dd>
                     <dt>所在地：</dt>
-                    <dd>广州大学城</dd>
+                    <dd><?php echo $row['address']; ?></dd>
                     <dt>联系方式：</dt>
-                    <dd>18813295242</dd>
+                    <dd><?php echo $row['phone']; ?></dd>
                 </dl>
+<!--                 <div class="button"> -->
+<!--                 	<button class="delete" type="button">删除</button> -->
+                	
+<!--                 </div> -->
             </div>
         </div>
     </div>
-    <div class="row">
-        <div class="col-md-12">
-            <div class = "goods">
-                <input type = "checkbox" value="1299"/>
-                <img src = "images/good1.jpg"/>
-                <dl class="dl-horizontal">
-                    <dt>价格：</dt>
-                    <dd><span class="price">1299</span></dd>
-                    <dt>所在地：</dt>
-                    <dd>广州大学城</dd>
-                    <dt>联系方式：</dt>
-                    <dd>18813295242</dd>
-                </dl>
-            </div>
-        </div>
-    </div>
-    <div class="row">
-        <div class="col-md-12">
-            <div class = "goods goods-last">
-                <input type = "checkbox" value="1299"/>
-                <img src = "images/good1.jpg"/>
-                <dl class="dl-horizontal">
-                    <dt>价格：</dt>
-                    <dd><span class="price">1299</span></dd>
-                    <dt>所在地：</dt>
-                    <dd>广州大学城</dd>
-                    <dt>联系方式：</dt>
-                    <dd>18813295242</dd>
-                </dl>
-            </div>
-        </div>
-    </div>
+    <?php endforeach;?>
+
     <div class="row">
         <div class="col-md-12" class="pagination">
             <ul class="pagination">

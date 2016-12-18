@@ -1,3 +1,8 @@
+<?php 
+require_once 'checkUser.php';
+checkUser();
+?>
+
 <!DOCTYPE html>
 <html>
 <head>

@@ -1,6 +1,6 @@
 <?php
-require 'config.php';
-require 'connect_db.php';
+require 'config/config.php';
+require 'config/connect_db.php';
 $defaults = array('username'=>'','sname'=>'','password'=>'','sure_password'=>'','phone'=>'','email'=>'');
 if($_SERVER['REQUEST_METHOD']=='GET'){
     $errors = array();
@@ -18,7 +18,7 @@ if($_SERVER['REQUEST_METHOD']=='GET'){
             for($i=0;$i<16;$i++){
                 $randomstring.=$pattern{(mt_rand(32,126))};
             }
-            $verifyurl = "http://127.0.0.1/Second-hand-trading-platform/verify.php";
+            $verifyurl = "http://localhost/Secondhand-trading-platform/verify.php";
             $verifystring = urlencode($randomstring);
             $verifyemail = urlencode($_POST['email']);
             $validusername = $_POST['username'];

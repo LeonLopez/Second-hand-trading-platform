@@ -1,10 +1,14 @@
+<?php 
+require_once 'checkUser.php';
+checkUser();
+?>
 <!DOCTYPE html>
 <html lang="zh-cn">
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Bootstrap 101 Template</title>
+    <title>大学生二手交易平台</title>
 
     <!-- Bootstrap -->
     <link href="css/bootstrap.min.css" rel="stylesheet">
@@ -32,7 +36,7 @@
                <img class="img-circle" src="images/headimage.jpg">
            </div>
             <div class="row">
-                <h5><strong>我的昵称</strong></h5>
+                <h5><strong><?php echo $_SESSION['SNAME'];?></strong></h5>
             </div>
             <div class="row">
                 <ul class="list-unstyled">
@@ -55,7 +59,7 @@
                     id = "contentiframe"
                     name = "contentiframe"
                     scrolling="yes"
-                    src = "shopping_cart.html">
+                    src = "shopping_cart.php">
             </iframe>
         </div>
     </div>
@@ -82,35 +86,35 @@
         });
         /*首页按钮事件*/
         $("#main-btn").click(function(){
-           location.href = "#";
+           location.href = "index.php";
         });
         /*购物车按钮事件*/
         $("#cart-btn").click(function(){
-            $("#contentiframe").attr("src","shopping_cart.html");
+            $("#contentiframe").attr("src","shopping_cart.php");
         });
         /*个人资料按钮事件*/
         $("#psn-btn").click(function(){
-            $("#contentiframe").attr("src","shopping_cart.html");
+            $("#contentiframe").attr("src","personal_inf_edit.php");
         });
         /*已购买按钮事件*/
         $("#pbuy-btn").click(function(){
-            $("#contentiframe").attr("src","shopping_cart.html");
+            $("#contentiframe").attr("src","already_purchase.php");
         });
         /*已收藏按钮事件*/
         $("#pcol-btn").click(function(){
-            $("#contentiframe").attr("src","shopping_cart.html");
+            $("#contentiframe").attr("src","already_collected.php");
         });
         /*已发布按钮事件*/
         $("#pb-btn").click(function(){
-            $("#contentiframe").attr("src","shopping_cart.html");
+            $("#contentiframe").attr("src","published.php");
         });
         /*编辑发布按钮事件*/
         $("#edit-pb-btn").click(function(){
-            $("#contentiframe").attr("src","shopping_cart.html");
+            $("#contentiframe").attr("src","publish_product.php");
         });
         /*退出按钮事件*/
         $("#exit-btn").click(function(){
-            $("#contentiframe").attr("src","shopping_cart.html");
+            $("#contentiframe").attr("src","logout.php");
         });
     })
 </script>

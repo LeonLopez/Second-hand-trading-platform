@@ -1,6 +1,6 @@
 <?php 
-require 'config.php';
-require 'connect_db.php';
+require 'config/config.php';
+require 'config/connect_db.php';
 if($_POST['submit']){
     $sql = "select * from user where username='".$_POST['username']."' and password='".$_POST['password']."';";
     $result = $db->query($sql);
@@ -24,9 +24,7 @@ if($_POST['submit']){
     
 }
 else{
-    if($_GET['error']){
-        echo "账号或密码不正确，请重新输入";
-    }
+    
 
 ?>
 <!DOCTYPE html>
@@ -53,7 +51,10 @@ else{
 				账号：<input style="border: 2px solid #307ac1"  type="text" id="username" class="username" name="username">
 				<div class="tips"></div>
 
-				密码：<input style="border: 2px solid #307ac1"  type="password" id="password" class="password" name="password">
+				密码：<input style="border: 2px solid #307ac1"  type="password" id="password" class="password" name="password"><br/>
+				<?php if($_GET['error']){
+        echo "&nbsp;&nbsp;&nbsp;账号或密码不正确，请重新输入";
+                }?>
 				<div class="tips"></div>
 
 				<div class="register">

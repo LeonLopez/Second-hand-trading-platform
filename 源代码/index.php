@@ -8,7 +8,7 @@ $where=$keywords?"where product.name like '%{$keywords}%'":null;
 $sql = "select * from product {$where} order by date desc ";
 $res = $db->query($sql);
 $totalRows = $res->num_rows;
-$pageSize = 16;
+$pageSize = 12;
 $totalPage = ceil($totalRows/$pageSize);
 $page=$_REQUEST['page']?(int)$_REQUEST['page']:1;
 if($page<1||$page==null||!is_numeric($page))$page=1;
@@ -44,8 +44,8 @@ $prores = $db->query($prosql);
 				<?php } ?>
 			</ul>
 			<ul class="top_right">
-				<li><a href="#" class="personal">个人中心</a></li>
-				<li><a href="#" class="shopping">购物车</a></li>
+				<li><a href="personal_center.php" class="personal">个人中心</a></li>
+				<li><a href="personal_center.php" class="shopping">购物车</a></li>
 				<li><a href="#" class="favorite">收藏夹</a></li>
 				<li><a href="#" class="annoucement">公告</a></li>
 			</ul>
@@ -136,7 +136,7 @@ $prores = $db->query($prosql);
 				<ul class="items cleafix">
 				<?php foreach ($prores as $row):?>
 					<li class="item">
-						<a href="productDetail.php?id=<?php echo $row['id'];?>" class="product_img" target="_blank">
+						<a href="product_information.php?id=<?php echo $row['id'];?>" class="product_img" target="_blank">
 							<?php 
 					         $imgsql = "select * from album where pid=".$row['id']." limit 1";
 					         $images = $db->query($imgsql);
@@ -154,7 +154,7 @@ $prores = $db->query($prosql);
 							<div class="price"><?php echo $row['price']; ?></div>
 							<div class="name"><a href="productDetail.php?id=<?php echo $row['id'];?>" ><?php echo $row['name']; ?></a></div>
 							<div class="details">
-								<a href="productDetail.php?id=<?php echo $row['id'];?>" >详情</a>
+								<a href="product_information.php?id=<?php echo $row['id'];?>" >详情</a>
 							</div>
 							<div class="like">
 								<a href="#">收藏</a>
@@ -165,7 +165,6 @@ $prores = $db->query($prosql);
 					<li class="item fixed"></li>
 					<li class="item fixed"></li>
 					<li class="item fixed"></li>
-					
 				</ul>
 			</div>
 			 
@@ -200,7 +199,7 @@ $prores = $db->query($prosql);
 	</div>
 	<script type="text/javascript">
 	function search(){
-		if(event.keyCode==13 || document.getElementById("search_btn").value=="搜索"){
+		if(event.keyCode==13){
 			var val=document.getElementById("search_goods").value;
 			window.location="index.php?keywords="+val;
 		}

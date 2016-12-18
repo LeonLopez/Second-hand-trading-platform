@@ -1,13 +1,13 @@
 <?php
-require 'config.php';
-require 'connect_db.php';
+require 'config/config.php';
+require 'config/connect_db.php';
 $verifystring = urldecode($_GET['verify']);
 $verifyemail = urldecode($_GET['email']);
-echo $verifystring."<br/>";
-echo $verifyemail;
+//echo $verifystring."<br/>";
+//echo $verifyemail;
 $checksql = "select * from user where verifystring='".$verifystring."' and email ='".$verifyemail."';";
 $result = $db->query($checksql);
-print_r($result);
+//print_r($result);
 $numrows = $result->num_rows;
 if($numrows==1){
     $row = mysqli_fetch_assoc($result);
