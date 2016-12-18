@@ -15,7 +15,7 @@ if($_POST['submit']){
     $proid = $db->insert_id;
     if($prores&&$proid){
         foreach($uploadFiles as $uploadFile){
-               echo $uploadFile['name']."<br>";
+               //echo $uploadFile['name']."<br>";
                $sql = "insert into album(pid,image) values(".$proid.",'".$uploadFile['name']."');";
                $db->query($sql);
         }
